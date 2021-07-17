@@ -1,0 +1,98 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>Tokyo2020 Newsletter Subscription</title>
+    <link rel="stylesheet" href="styles.css">
+
+
+    <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body class="text-center">
+
+    <form  action="/"class="form-signin" method="post">
+  <img class="mb-4" src="olympics.png" alt="" width="250" height="250">
+  <h1 class="h3 mb-3 font-weight-normal">Sign Up for TOKYO2020 Newsletter</h1>
+
+  <input id="firstname"type="text" name="fname"  class="form-control first" placeholder="Enter Your First name" required >
+
+  <input  id="lastname" type="text" name="lname" class="form-control middle" placeholder="Enter Your Last name" required>
+  <input id="emailfield"type="text" name="email" class="form-control last" placeholder="Enter Your Email-Id" required>
+
+  <button class="btn btn-lg btn-primary btn-block" type="button" onclick="saveData();">Sign Up</button>
+  <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+</form>
+<script>
+   function getFormData(){
+
+     var fnamevalue=$("#firstname").val();
+     if(fnamevalue ==""){
+       alert("FirstName Required Value");
+       $("#firstname").focus();
+       return"";
+     }
+     var lnamevalue=$("#lastname").val();
+     if(lnamevalue ==""){
+       alert("LastName Required Value");
+       $("#lastname").focus();
+       return"";
+     }
+     var emailvalue=$("#emailfield").val();
+     if(fnamevalue ==""){
+       alert("Email Required Value");
+       $("#emailfield").focus();
+       return"";
+     }
+     var data={
+       firstname:fnamevalue,
+       lastname:lnamevalue,
+       emailfield:emailvalue,
+     };
+     return JSON.stringify(data);
+   }
+   function createPUTREQUEST(connToken, jsonObj, dbName, relName) {
+     var putRequest = "{\n"+ "\"token\" : \""+ connToken+ "\","+ "\"dbName\": \""+ dbName+ "\",\n" + "\"cmd\" : \"PUT\",\n"+ "\"rel\" : \""+ relName + "\","+ "\"jsonStr\": \n"+ jsonObj+ "\n"+ "}";
+     return putRequest;
+   }
+   function executeCommand(reqString,dbbaseurl,apiendpointurl){
+     var url=dbbaseurl+apiendpointurl;
+     var jsonObj;
+     $.post(url, reqString, function (result) {jsonObj = JSON.parse(result);}).fail(function (result) {
+       var dataJsonObj = result.responseText;
+       jsonObj = JSON.parse(dataJsonObj);
+      });
+      return jsonObj;
+   }
+   function resetForm() {
+     $("#firstname").val("");
+     $("#lastname").val("");
+     $("#emailfield").val("");
+     $("#firstname").focus();
+   }
+   function saveData() {
+     var formData=getFormData();
+     if(formData==""){
+       return;
+     }
+     var putReq=createPUTREQUEST("90935834|-31948844447746550|90945130",formData,"Subscribers","Subscribers-Data");
+     alert(putReq);
+     jQuery.ajaxSetup({async:false});
+     var result=executeCommand(putReq,"http://api.login2explore.com:5577","/api/iml");
+     alert(JSON.stringify(result));
+     jQuery.ajaxSetup({async:true});
+     resetForm();
+   }
+
+
+</script>
+</body>
+</html>
+
