@@ -18,3 +18,21 @@
   
   <h2>Screenshot</h2>
   <img src="public_html/Screenshot (190).png"</img>
+
+  <h3>Release History</h3>
+  <ul>
+  <li>1.0</li>
+   <ul>
+     <li>Made Changes to the html document</li>
+  </ul>
+  <li>0.0</li>
+  <ul>
+    <li>Initial webpage without any database</li>
+  </ul>
+  </ul>
+  
+  <h3>Sources</h3>
+  <ul>
+    <li><a href="https://getbootstrap.com/docs/4.3/components/forms/">Bootstrap Forms</a></li>
+    <li><a href="https://login2explore.com/jpdb/docs.html">JsonPowerDB</a></li>
+  </ul>
