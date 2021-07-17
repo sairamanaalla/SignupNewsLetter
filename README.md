@@ -15,4 +15,4 @@
 <li>It helps developers in faster coding, in-turn reduces development cost.</li>
 <li>Retrival of data is fast and storing of data is simple.</li>
 <li>It is low level (raw) form of data and is also human readable.</li>
-  <img src="public_html/Screenshot(190).png"</img>
+  <img src="public_html/Screenshot (190).png"</img>
